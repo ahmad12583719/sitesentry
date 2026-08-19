@@ -41,7 +41,7 @@ def terminal_frame():
     draw.ellipse((74, 128, 84, 138), fill=AMBER)
     draw.ellipse((92, 128, 102, 138), fill=TEAL)
     lines = [
-        "$ git clone https://github.com/<your-username>/sitesentry.git",
+        "$ git clone https://github.com/ahmad12583719/sitesentry.git",
         "Cloning into 'sitesentry'...",
         "$ cd sitesentry",
         "$ ./install.sh",
