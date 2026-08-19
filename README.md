@@ -1,6 +1,6 @@
 # SiteSentry
 
-[![Build status](https://img.shields.io/github/actions/workflow/status/your-username/sitesentry/tests.yml?label=tests&logo=github)](../../actions/workflows/tests.yml)
+[![Build status](https://img.shields.io/github/actions/workflow/status/ahmad12583719/sitesentry/tests.yml?label=tests&logo=github)](../../actions/workflows/tests.yml)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 ![OS support](https://img.shields.io/badge/OS-Linux%20%7C%20macOS%20%7C%20Windows-4B8BBE)
 ![Local-first](https://img.shields.io/badge/Privacy-100%25%20local--first-0B8F83)
