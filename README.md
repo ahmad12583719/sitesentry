@@ -43,7 +43,7 @@ Open a terminal, copy the commands for your operating system, and let the instal
 #### Linux and macOS
 
 ```bash
-git clone https://github.com/<your-username>/sitesentry.git
+git clone https://github.com/ahmad12583719/sitesentry.git
 cd sitesentry
 chmod +x install.sh
 ./install.sh
@@ -53,7 +53,7 @@ chmod +x install.sh
 #### Windows PowerShell
 
 ```powershell
-git clone https://github.com/<your-username>/sitesentry.git
+git clone https://github.com/ahmad12583719/sitesentry.git
 cd sitesentry
 Set-ExecutionPolicy -Scope Process Bypass
 .\install.ps1
