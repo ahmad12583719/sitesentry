@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="SiteSentry is a private, local-first website security scanner." />
+    <title>SiteSentry · Local Security Inspection</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="signal-rail" aria-label="SiteSentry navigation">
+        <a class="brand" href="/" aria-label="SiteSentry home">
+          <span class="aperture" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span>Site<span>Sentry</span></span>
+        </a>
+        <nav class="rail-nav" aria-label="Scan sections">
+          <a class="rail-link active" href="#overview"><span aria-hidden="true">01</span> Overview</a>
+          <a class="rail-link" href="#findings"><span aria-hidden="true">02</span> Evidence</a>
+          <a class="rail-link" href="#method"><span aria-hidden="true">03</span> Method</a>
+        </nav>
+        <div class="rail-footer">
+          <span class="beacon" aria-hidden="true"></span>
+          <p>Local session<br /><strong id="session-name">Not signed in</strong></p>
+          <button class="quiet-button" id="logout-button" hidden type="button">Sign out</button>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="topbar-stamp"><span class="stamp-mark" aria-hidden="true"></span><p class="eyebrow">Private local inspection <span>· axis 01</span></p></div>
+          <div class="topbar-actions"><p class="topbar-note"><span class="status-dot" aria-hidden="true"></span> Requests go only to your target</p><button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false"><span class="theme-glyph" aria-hidden="true">◐</span><span id="theme-label">Paper mode</span></button></div>
+        </header>
+
+        <section class="login-shell" id="auth-panel" aria-labelledby="auth-title">
+          <div class="auth-copy">
+            <p class="eyebrow">First-use credential</p>
+            <h1 id="auth-title">Keep the inspection desk on your machine.</h1>
+            <p>SiteSentry stores one hashed local credential in a local SQLite database. It has no cloud account, telemetry, or remote login path.</p>
+            <div class="privacy-list">
+              <p><span>01</span> Credentials are hashed, never stored in plaintext.</p>
+              <p><span>02</span> Reports remain in local memory during this session.</p>
+              <p><span>03</span> Scans only request the public target you provide.</p>
+            </div>
+          </div>
+          <form class="auth-card" id="auth-form" novalidate>
+            <p class="eyebrow" id="auth-mode-label">Set up local access</p>
+            <h2 id="auth-form-title">Create your local credential</h2>
+            <label for="username">Username</label>
+            <input id="username" name="username" autocomplete="username" minlength="3" maxlength="64" required />
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="new-password" minlength="12" required />
+            <p class="form-hint" id="password-hint">Use at least 12 characters. This password stays on this device.</p>
+            <p class="form-error" id="auth-error" role="alert" hidden></p>
+            <button class="primary-button wide" id="auth-submit" type="submit">Create local credential <span aria-hidden="true">→</span></button>
+          </form>
+        </section>
+
+        <div id="scanner-shell" hidden>
+          <section class="command-band" id="overview" aria-labelledby="scan-heading">
+            <div class="orbit-dial" aria-hidden="true"><i class="orbit orbit-one"></i><i class="orbit orbit-two"></i><i class="orbit orbit-three"></i><b></b><span class="north-tick">N</span><span class="east-tick">E</span><span class="south-tick">S</span></div>
+            <div class="command-copy">
+              <p class="eyebrow">Target inspection <span>· aperture open</span></p>
+              <h1 id="scan-heading">Read the perimeter.<br /><em>Keep the evidence.</em></h1>
+              <p>SiteSentry turns a target’s visible security configuration into a private, traceable field record. Every signal is observed locally, explained plainly, and linked to a next action.</p>
+            </div>
+            <form class="scan-form" id="scan-form" novalidate>
+              <label for="target">Website domain or URL</label>
+              <div class="input-row">
+                <input id="target" name="target" inputmode="url" autocomplete="url" placeholder="example.com" required />
+                <button class="primary-button" id="scan-button" type="submit">Run scan <span aria-hidden="true">→</span></button>
+              </div>
+              <label class="consent-row" for="authorized">
+                <input id="authorized" name="authorized" type="checkbox" required />
+                <span>I am authorized to inspect this public target.</span>
+              </label>
+              <p class="form-error" id="scan-error" role="alert" hidden></p>
+            </form>
+          </section>
+
+          <section class="scanning-state" id="scanning-state" hidden aria-live="polite">
+            <div class="scanning-dial" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+            <div class="scan-line"><span id="scan-progress"></span></div>
+            <p class="eyebrow">Inspection in progress</p>
+            <h2 id="scan-stage">Preparing a bounded set of checks…</h2>
+            <p>SiteSentry is contacting the target directly from this device. It does not send your target or findings to another service.</p>
+          </section>
+
+          <section class="results-shell" id="results-shell" hidden aria-live="polite">
+            <div class="posture-panel">
+              <div class="posture-metadata">
+                <p class="eyebrow">Security posture <span>· weighted record</span></p>
+                <p class="target-label" id="report-target">—</p>
+                <p class="scan-timestamp" id="report-time">—</p>
+                <p class="posture-message" id="posture-message">—</p>
+              </div>
+              <div class="grade-cluster" aria-label="Security grade">
+                <div class="grade-ring"><i></i><i></i><span id="grade-letter">—</span></div>
+                <div><p class="score-label"><strong id="score-value">0</strong>/100</p><p id="score-description">Awaiting inspection</p></div>
+              </div>
+              <div class="export-actions" aria-label="Export report">
+                <a class="export-link" id="export-json" href="#">JSON</a>
+                <a class="export-link" id="export-html" href="#">HTML</a>
+                <a class="export-link" id="export-pdf" href="#">PDF</a>
+              </div>
+            </div>
+
+            <div class="summary-ribbon"><p class="ribbon-label">Signal register</p><div id="summary-ribbon" aria-label="Finding summary"></div></div>
+            <section class="evidence-section" id="findings" aria-labelledby="findings-heading">
+              <div class="section-heading"><div><p class="eyebrow">The evidence</p><h2 id="findings-heading">What needs attention.</h2></div><p id="finding-count">—</p></div>
+              <div class="finding-list" id="finding-list"></div>
+            </section>
+          </section>
+
+          <section class="method-section" id="method" aria-labelledby="method-heading">
+            <div><p class="eyebrow">Inspection protocol <span>· no black box</span></p><h2 id="method-heading">Fixed checks.<br />Local evidence.</h2><p class="method-intro">The scanner is intentionally narrow: a documented set of direct observations, never a cloud reputation score or a broad network sweep.</p></div>
+            <div class="method-grid">
+              <article><p class="method-number">01</p><h3>TLS transport</h3><p>Certificate expiry and issuer, negotiated protocol, and exposed key strength.</p></article>
+              <article><p class="method-number">02</p><h3>HTTP responses</h3><p>CSP, HSTS, clickjacking, MIME-sniffing, and referrer-policy baselines.</p></article>
+              <article><p class="method-number">03</p><h3>Public surface</h3><p>A short fixed list of common ports plus non-destructive probes for common web exposures.</p></article>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <template id="finding-template">
+      <article class="finding-strip">
+        <div class="severity-pip" aria-hidden="true"></div>
+        <div class="finding-main"><p class="finding-meta"></p><h3></h3><p class="finding-summary"></p></div>
+        <details><summary>How to fix it</summary><p class="finding-remediation"></p></details>
+      </article>
+    </template>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,195 @@
+/* Aperture Atlas: SiteSentry's light/dark field-record system uses calibrated arcs, provenance ticks, and a restrained mineral-teal instrument language—never generic cyber imagery. */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --primary: oklch(0.58 0.11 178);
+  --primary-foreground: oklch(0.99 0.01 175);
+  --sidebar-primary: oklch(0.65 0.11 178);
+  --sidebar-primary-foreground: oklch(0.99 0.01 175);
+  --chart-1: oklch(0.65 0.11 178);
+  --chart-2: oklch(0.68 0.14 76);
+  --chart-3: oklch(0.58 0.17 28);
+  --chart-4: oklch(0.52 0.08 224);
+  --chart-5: oklch(0.72 0.04 170);
+  --radius: 0.3rem;
+  --background: oklch(0.96 0.012 165);
+  --foreground: oklch(0.22 0.025 174);
+  --card: oklch(0.99 0.004 180);
+  --card-foreground: oklch(0.22 0.025 174);
+  --popover: oklch(0.99 0.004 180);
+  --popover-foreground: oklch(0.22 0.025 174);
+  --secondary: oklch(0.91 0.024 167);
+  --secondary-foreground: oklch(0.29 0.035 174);
+  --muted: oklch(0.93 0.017 170);
+  --muted-foreground: oklch(0.45 0.032 173);
+  --accent: oklch(0.91 0.05 178);
+  --accent-foreground: oklch(0.22 0.025 174);
+  --destructive: oklch(0.53 0.18 28);
+  --destructive-foreground: oklch(0.98 0.006 30);
+  --border: oklch(0.82 0.028 170);
+  --input: oklch(0.82 0.028 170);
+  --ring: oklch(0.58 0.11 178);
+  --sidebar: oklch(0.2 0.026 183);
+  --sidebar-foreground: oklch(0.92 0.015 175);
+  --sidebar-accent: oklch(0.28 0.034 183);
+  --sidebar-accent-foreground: oklch(0.97 0.007 174);
+  --sidebar-border: oklch(0.31 0.03 183);
+  --sidebar-ring: oklch(0.58 0.11 178);
+}
+
+.dark {
+  --background: oklch(0.2 0.026 183);
+  --foreground: oklch(0.92 0.015 175);
+  --card: oklch(0.26 0.026 183);
+  --card-foreground: oklch(0.92 0.015 175);
+  --popover: oklch(0.26 0.026 183);
+  --popover-foreground: oklch(0.92 0.015 175);
+  --secondary: oklch(0.3 0.03 183);
+  --secondary-foreground: oklch(0.79 0.018 175);
+  --muted: oklch(0.3 0.03 183);
+  --muted-foreground: oklch(0.7 0.021 175);
+  --accent: oklch(0.3 0.045 178);
+  --accent-foreground: oklch(0.97 0.007 174);
+  --destructive: oklch(0.64 0.18 28);
+  --destructive-foreground: oklch(0.99 0.006 30);
+  --border: oklch(0.4 0.026 183);
+  --input: oklch(0.4 0.026 183);
+  --ring: oklch(0.65 0.11 178);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@keyframes atlas-turn {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes atlas-counterturn {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes atlas-pulse {
+  50% { opacity: .5; transform: scale(1.06); }
+}
+
+.atlas-orbit { position: absolute; right: -8rem; top: 50%; width: min(39vw, 420px); height: min(39vw, 420px); min-width: 300px; min-height: 300px; transform: translateY(-50%); pointer-events: none; }
+.atlas-grid { position: absolute; inset: -26%; background-image: linear-gradient(to right, rgb(128 215 200 / 13%) 1px, transparent 1px), linear-gradient(to bottom, rgb(128 215 200 / 13%) 1px, transparent 1px); background-size: 28px 28px; mask-image: radial-gradient(circle, black 22%, transparent 73%); }
+.atlas-ring { position: absolute; display: block; border-radius: 50%; }
+.atlas-ring-a { inset: 0; border: 1px solid rgb(148 224 211 / 48%); border-left-color: transparent; border-bottom-color: transparent; animation: atlas-turn 22s linear infinite; }
+.atlas-ring-b { inset: 13%; border: 15px solid #0b8f83; border-left-color: transparent; border-bottom-color: transparent; animation: atlas-counterturn 16s linear infinite; }
+.atlas-ring-c { inset: 30%; border: 1px dashed rgb(184 239 228 / 70%); border-right-color: transparent; animation: atlas-turn 12s linear infinite; }
+.atlas-cursor { position: absolute; z-index: 2; width: 9px; height: 9px; border: 2px solid #98e3d7; background: #071d20; }
+.atlas-cursor-a { top: 21%; left: 23%; }.atlas-cursor-b { right: 17%; bottom: 24%; background: #0b8f83; border-color: #0b8f83; }
+.atlas-core { position: absolute; z-index: 3; inset: 39%; display: grid; place-items: center; border: 1px solid rgb(182 241 230 / 60%); background: #061719; box-shadow: 0 0 0 15px rgb(11 143 131 / 16%); }
+.atlas-core img { width: 84%; height: 84%; object-fit: contain; }.atlas-index { position: absolute; z-index: 4; color: #8bd7ca; font: 700 8px/1 monospace; letter-spacing: .14em; }
+.atlas-index-top { top: -16px; left: 9%; }.atlas-index-right { right: -20px; top: 54%; transform: rotate(90deg); }.atlas-index-bottom { bottom: -16px; left: 46%; }
+.atlas-orbit.is-scanning .atlas-ring-b { animation-duration: 1.6s; }.atlas-orbit.is-scanning .atlas-core { animation: atlas-pulse 700ms ease-in-out infinite; }
+.mini-diagram { position: relative; height: 76px; overflow: hidden; border: 1px solid #6e9f96; background: #0b2022; }.mini-diagram::before, .mini-diagram::after { content: ""; position: absolute; border-radius: 50%; }
+.mini-diagram::before { width: 54px; height: 54px; top: 10px; left: 14px; border: 7px solid #0b8f83; border-left-color: transparent; }.mini-diagram::after { width: 28px; height: 28px; top: 23px; left: 27px; border: 1px dashed #caeee6; }
+.mini-diagram span { position: absolute; z-index: 2; width: 38%; height: 1px; background: #7ad1c4; right: 0; top: 50%; box-shadow: 0 -13px 0 #7ad1c440, 0 13px 0 #7ad1c440; }
+.mini-diagram.diagram-http::before { border-radius: 0; width: 38px; height: 38px; left: 24px; top: 18px; border: 1px solid #0b8f83; box-shadow: 12px -9px 0 -5px #d8f6ef, -12px 9px 0 -5px #d8f6ef; }.mini-diagram.diagram-http::after { width: 76%; height: 1px; top: 38px; left: 14px; border: 0; background: #7ad1c488; box-shadow: 0 -14px 0 #7ad1c444, 0 14px 0 #7ad1c444; }
+.mini-diagram.diagram-surface::before { width: 12px; height: 12px; left: 20px; top: 31px; border: 0; background: #0b8f83; box-shadow: 22px -17px 0 #90ddcf, 45px 7px 0 #c88b26, 72px -15px 0 #90ddcf; }.mini-diagram.diagram-surface::after { width: 78%; height: 1px; top: 37px; left: 10px; border: 0; background: #d6f1ec66; }
+@media (max-width: 900px) { .atlas-orbit { right: -5rem; top: auto; bottom: -8rem; transform: none; opacity: .72; } }
+@media (prefers-reduced-motion: reduce) { .atlas-ring, .atlas-core { animation: none !important; } }
+
+@layer components {
+  /**
+   * Custom container utility that centers content and adds responsive padding.
+   *
+   * This overrides Tailwind's default container behavior to:
+   * - Auto-center content (mx-auto)
+   * - Add responsive horizontal padding
+   * - Set max-width for large screens
+   *
+   * Usage: <div className="container">...</div>
+   *
+   * For custom widths, use max-w-* utilities directly:
+   * <div className="max-w-6xl mx-auto px-4">...</div>
+   */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* 16px - mobile padding */
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem; /* 32px - desktop padding */
+      padding-right: 2rem;
+      max-width: 1280px; /* Standard content width */
+    }
+  }
+}
