@@ -1,0 +1,37 @@
+name: Feature request
+description: Suggest an improvement that keeps SiteSentry local-first and deterministic.
+title: "feature: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for the idea. SiteSentry intentionally avoids telemetry, cloud dependency, broad network scans, and non-deterministic scoring.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the workflow or outcome you want to improve.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Explain the feature and how it should behave for a local user.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Share workarounds or other approaches you considered.
+  - type: checkboxes
+    id: principles
+    attributes:
+      label: Project principles
+      options:
+        - label: This request can be implemented without sending telemetry or target data to third-party services.
+          required: true
+        - label: This request does not require exploit behavior, credential attacks, or broad network scanning.
+          required: true

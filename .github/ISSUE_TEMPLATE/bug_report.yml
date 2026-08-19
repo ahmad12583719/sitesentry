@@ -1,0 +1,57 @@
+name: Bug report
+description: Report a reproducible problem with SiteSentry.
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve SiteSentry. Please do not include private targets, credentials, reports, or sensitive scan results.
+  - type: input
+    id: version
+    attributes:
+      label: SiteSentry version or commit
+      description: Tell us the release, branch, or commit you tested.
+      placeholder: "main @ abc1234"
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the observed behavior without naming or exposing a target you do not control.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Start SiteSentry with …
+        2. Open …
+        3. Select …
+        4. Observe …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Safe logs or screenshots (optional)
+      description: Remove domains, IP addresses, credentials, report contents, and other sensitive data before attaching anything.
